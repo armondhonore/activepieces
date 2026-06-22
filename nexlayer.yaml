@@ -1,0 +1,40 @@
+application:
+  name: activepieces
+  pods:
+  - name: app
+    image: activepieces/activepieces:latest
+    path: /
+    servicePorts:
+    - 8080
+    vars:
+      AP_ENCRYPTION_KEY: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+      AP_JWT_SECRET: "e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+      AP_POSTGRES_DATABASE: activepieces
+      AP_POSTGRES_HOST: postgres.pod
+      AP_POSTGRES_PORT: "5432"
+      AP_POSTGRES_USERNAME: activepieces
+      AP_POSTGRES_PASSWORD: activepieces
+      AP_REDIS_URL: "redis://redis.pod:6379"
+      AP_FRONTEND_URL: "https://relaxed-weasel-activepieces.cloud.nexlayer.ai"
+      AP_SIGN_UP_ENABLED: "true"
+      AP_TELEMETRY_ENABLED: "false"
+  - name: postgres
+    image: postgres:16-alpine
+    servicePorts:
+    - 5432
+    vars:
+      POSTGRES_DB: activepieces
+      POSTGRES_USER: activepieces
+      POSTGRES_PASSWORD: activepieces
+    volumes:
+    - name: activepieces-db
+      mountPath: /var/lib/postgresql/data
+      size: 5Gi
+  - name: redis
+    image: redis:7-alpine
+    servicePorts:
+    - 6379
+    volumes:
+    - name: activepieces-redis
+      mountPath: /data
+      size: 2Gi
