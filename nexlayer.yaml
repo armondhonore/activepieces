@@ -13,7 +13,7 @@ application:
       AP_POSTGRES_HOST: postgres.pod
       AP_POSTGRES_PORT: "5432"
       AP_POSTGRES_USERNAME: activepieces
-      AP_POSTGRES_PASSWORD: activepieces
+      AP_POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       AP_REDIS_URL: "redis://redis.pod:6379"
       AP_FRONTEND_URL: "https://relaxed-weasel-activepieces.cloud.nexlayer.ai"
       AP_SIGN_UP_ENABLED: "true"
